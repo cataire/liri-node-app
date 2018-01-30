@@ -6,6 +6,7 @@ const request = require('request');
 const fs = require('file-system');
 
 let command = process.argv[2];
+let argumentPresent = process.argv[3];
 let search = process.argv.splice(3);
 
 function run(command, search) {
@@ -90,9 +91,10 @@ function searchTwitter() {
 
 function searchSpotify(search) {
 
-	console.log(search);
+console.log(search);
+console.log(testVariable);
 
-	if (!process.argv[3]) {
+	if (argumentPresent === undefined) {
 		search = 'bill gates';
 	};
 
@@ -100,6 +102,8 @@ function searchSpotify(search) {
 	  id: spotifyKeys.id,
 	  secret: spotifyKeys.secret
 	});
+
+		console.log(search);
 
 	spotify.search({ type: 'track', query: search }, function(error, data) {
 
@@ -133,9 +137,9 @@ function searchOMDB(search) {
 
 console.log(search);
 
-	// if (search === undefined) {
-	// 	search = 'Mr Nobody';
-	// };
+	if (argumentPresent === undefined) {
+		search = 'Mr Nobody';
+	};
 
 request('http://www.omdbapi.com/?apikey=trilogy&t=' + search, function (error, response, body) {
 
